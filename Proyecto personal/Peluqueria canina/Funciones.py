@@ -10,11 +10,12 @@ import os
 # funciones/clientes.py
 # Alta de clientes.
 def agregar_cliente(clientes:list) -> bool:
+    id_nombre = input("ID cliente: ")
     nombre = input("Nombre: ")
     telefono = input("Teléfono: ")
     direccion = input("Dirección: ")
 
-    cliente = [nombre, telefono, direccion]
+    cliente = [nombre, telefono, direccion, id_nombre]
 
     clientes.append(cliente)
 
@@ -48,7 +49,8 @@ def normalizar_datos_clientes(lista_valores:list) -> None: # Debo realizar para 
     """   
     # debo normalizar los numeros del archivo csv 
     if type(lista_valores) == list:
-        lista_valores[1] = int(lista_valores[1])
+        lista_valores[0] = int(lista_valores[0])
+        lista_valores[2] = int(lista_valores[2])
 
 def reemplazar_caracteres(cadena_original:str,caracter_viejo:str,caracter_nuevo:str) -> str:
     """Reemplazar caracteres
@@ -155,7 +157,52 @@ def unir_cadena(lista:list,separador:str = ",") -> str:
 
 # funciones/mascotas.py
 # Alta de mascotas.
-# def agragar_mascota()
+def agregar_mascota(mascota:list) -> bool:
+    id_cliente = input("Nombre del perro: ")
+    id_mascota = input("Nombre del perro: ")
+    nombre = input("Nombre del perro: ")
+    raza = input("Nombre del perro: ")
+    tamaño = input("Nombre del perro: ")
+    sexo = input("Nombre del perro: ")
+    observaciones = input("Nombre del dueño: ")
+
+    mascota = [id_cliente, id_mascota, nombre, raza, tamaño, sexo, observaciones]
+
+    mascota.append(mascota)
+
+    return True
+def leer_mascota_csv(nombre_archivo:str) -> list: # Debo crear para usar en mascotas y turnos
+    """Lectura de archivo csv 
+
+    Args:
+        nombre_archivo (str): nombre del archivo
+
+    Returns:
+        list: al archivo lo convierte en matriz
+    """    
+    matriz = []
+
+    if type(nombre_archivo) == str and os.path.exists(nombre_archivo):
+        with open(nombre_archivo,"r",encoding="utf-8") as archivo:
+            archivo.readline() # elimina la primera linea
+            for linea in archivo:
+                fila = separar_cadena(linea)
+                normalizar_datos_mascota(fila) # debo normalizar los numeros que tenga dicho archivo
+                matriz.append(fila)
+    return matriz
+
+def normalizar_datos_mascota(lista_valores:list) -> None: # Debo realizar para mascotas y turnos
+    """Normalizar datos
+
+    Args:
+        lista_valores (list): convierte de "123" a 123  de una lista
+    """   
+    # debo normalizar los numeros del archivo csv 
+    if type(lista_valores) == list:
+        lista_valores[0] = int(lista_valores[0])
+        lista_valores[1] = int(lista_valores[1])
+
+
 # Modificación.
 # def modificar_mascota()
 # Buscar por dueño.
@@ -164,6 +211,36 @@ def unir_cadena(lista:list,separador:str = ",") -> str:
 # funciones/turnos.py
 # Crear turno.
 # def crear_turno()
+def leer_turno_csv(nombre_archivo:str) -> list: # Debo crear para usar en mascotas y turnos
+    """Lectura de archivo csv 
+
+    Args:
+        nombre_archivo (str): nombre del archivo
+
+    Returns:
+        list: al archivo lo convierte en matriz
+    """    
+    matriz = []
+
+    if type(nombre_archivo) == str and os.path.exists(nombre_archivo):
+        with open(nombre_archivo,"r",encoding="utf-8") as archivo:
+            archivo.readline() # elimina la primera linea
+            for linea in archivo:
+                fila = separar_cadena(linea)
+                normalizar_datos_turnos(fila) # debo normalizar los numeros que tenga dicho archivo
+                matriz.append(fila)
+    return matriz
+
+def normalizar_datos_turnos(lista_valores:list) -> None: # Debo realizar para mascotas y turnos
+    """Normalizar datos
+
+    Args:
+        lista_valores (list): convierte de "123" a 123  de una lista
+    """   
+    # debo normalizar los numeros del archivo csv 
+    if type(lista_valores) == list:
+        lista_valores[1] = int(lista_valores[1])
+
 # Cancelar turno.
 # def cancelar_turno()
 # Mostrar agenda.
