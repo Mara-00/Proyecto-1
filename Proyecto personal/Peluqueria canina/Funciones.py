@@ -148,9 +148,81 @@ def unir_cadena(lista:list,separador:str = ",") -> str:
 # def eliminar_cliente(lista_nombres:list):
 #   input("Nombre del cliente que deseas eliminar: ")
 
+def buscar_cliente(clientes: list, id_cliente: int) -> int:
+    """Busca un cliente por su ID.
+
+    Args:
+        clientes (list): lista de clientes
+        id_cliente (int): ID del cliente que se desea buscar
+
+    Returns:
+        int: posición del cliente dentro de la lista. Si no existe, devuelve -1.
+    """
+    posicion = -1
+
+    if type(clientes) == list and type(id_cliente) == int:
+        for i in range(len(clientes)):
+            if clientes[i][0] == id_cliente:
+                posicion = i
+                break
+
+    return posicion
+
+def eliminar_cliente(clientes: list, id_cliente: int) -> bool:
+    """Elimina un cliente de la lista.
+
+    Args:
+        clientes (list): lista de clientes
+        id_cliente (int): ID del cliente a eliminar
+
+    Returns:
+        bool: True si se eliminó, False si no se encontró
+    """
+    retorno = False
+
+    if type(clientes) == list and type(id_cliente) == int:
+        posicion = buscar_cliente(clientes, id_cliente)
+
+        if posicion != -1:
+            clientes.pop(posicion)
+            retorno = True
+
+    return retorno
+
+
 # Modificación.
 # def modificar_cliente(lista_nombre:list):
 #   input("nombre del cliente que deas cambiar: ")
+def modificar_cliente(clientes: list, id_cliente: int) -> bool:
+    retorno = False
+
+    posicion = buscar_cliente(clientes, id_cliente)
+
+    if posicion != -1:
+
+        print("\n¿Qué desea modificar?")
+        print("1. Nombre")
+        print("2. Apellido")
+        print("3. Teléfono")
+        print("0. Cancelar")
+
+        opcion = input("Seleccione una opción: ")
+
+        match opcion:
+            case "1":
+                clientes[posicion][1] = input("Nuevo nombre: ")
+                retorno = True
+
+            case "2":
+                clientes[posicion][2] = input("Nuevo apellido: ")
+                retorno = True
+
+            case "3":
+                clientes[posicion][3] = input("Nuevo teléfono: ")
+                retorno = True
+
+    return retorno
+
 
 # Listado.
 # def lista_clientes()
@@ -263,3 +335,4 @@ def normalizar_datos_turnos(lista_valores:list) -> None: # Debo realizar para ma
 # Validar fecha.
 # def agregar_fecha()
 # Validar opciones del menú.
+
